@@ -11,6 +11,7 @@ export interface TaskProps {
 function TaskList() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
 
+  //load task list even if when chnaging task list
   useEffect(() => {
     async function loadTaskList() {
       const data = await getTasks();
@@ -19,11 +20,15 @@ function TaskList() {
     loadTaskList();
   }, [tasks]);
 
+  //call for making task as done operation
   const handleDone = async (id: number) => {
     await markTaskasCompleted(id);
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  if (!tasks || tasks.length === 0) {
+    <p>No Tasks Avalable</p>;
+  }
   return (
     <ul>
       {tasks.map((task) => (

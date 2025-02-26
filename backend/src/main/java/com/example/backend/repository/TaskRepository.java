@@ -14,13 +14,13 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
+    //get 5 tasks by ascending order
     List<Task> findTop5ByIsClosedFalseOrderByCreatedAtAsc();
 
+    //update isclosed status
     @Modifying
     @Transactional
     @Query(value = "UPDATE task t SET t.isclosed = :isClosed, t.updated_at = :updatedAt WHERE t.id = :taskId", nativeQuery = true)
     void updateIsClosedAndUpdatedAtById(int taskId, Boolean isClosed, LocalDateTime updatedAt);
-
-    void deleteById(int id);
 
 }

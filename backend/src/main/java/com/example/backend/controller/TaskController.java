@@ -18,6 +18,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    //create task
     @PostMapping("/create")
     public ResponseEntity<?> createTask(@RequestBody TaskDto task){
        try{
@@ -28,6 +29,7 @@ public class TaskController {
        }
     }
 
+    //print task list
     @GetMapping("/list")
     public ResponseEntity<?> getTaskList(){
         try{
@@ -38,6 +40,7 @@ public class TaskController {
         }
     }
 
+    // mark task as done
     @PutMapping("/close/{id}")
     public ResponseEntity<?> updateTaskAsCompleted(@PathVariable("id") int taskId){
         try{
@@ -47,18 +50,5 @@ public class TaskController {
             return ResponseEntity.badRequest().body(new MessageResponseDto(e.getMessage(), false));
         }
     }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> RemoveTask(@PathVariable("id") int taskId){
-        try{
-            taskService.deleteTask(taskId);
-            return ResponseEntity.ok().body(new MessageResponseDto("Successfully Deleted", true));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(new MessageResponseDto(e.getMessage(), false));
-        }
-    }
-
-
-
 
 }

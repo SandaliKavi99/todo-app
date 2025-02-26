@@ -1,36 +1,44 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import TaskForm from "../components/TaskForm";
-import { createTask } from "../api/taskApi";
+import { createTask } from "../api/taskApi"; 
 
-jest.mock("../api/taskApi", () => ({
-  createTask: jest.fn(),
-}));
+// Mock the createTask API call
+jest.mock("../api/taskApi");
 
 describe("TaskForm Component", () => {
-  test("renders form fields correctly", () => {
-    render(<TaskForm />);
-    
-    expect(screen.getByPlaceholderText("Title")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Description")).toBeInTheDocument();
-    expect(screen.getByText("Add")).toBeInTheDocument();
+  beforeAll(() => {
+    Object.defineProperty(window, "location", {
+      value: { reload: jest.fn() },
+      writable: true,
+    });
   });
 
-  test("submits form with user input", async () => {
+  afterEach(() => {
+    // Clean up mocks after each test
+    jest.clearAllMocks();
+  });
+
+  it("submits the form and resets inputs", async () => {
     render(<TaskForm />);
 
     const titleInput = screen.getByPlaceholderText("Title");
-    const descriptionInput = screen.getByPlaceholderText("Description");
+    const descInput = screen.getByPlaceholderText("Description");
     const submitButton = screen.getByText("Add");
 
-    fireEvent.change(titleInput, { target: { value: "Test Task" } });
-    fireEvent.change(descriptionInput, { target: { value: "Test Description" } });
+    fireEvent.change(titleInput, { target: { value: "New Task" } });
+    fireEvent.change(descInput, { target: { value: "Task Description" } });
 
     fireEvent.click(submitButton);
 
-    expect(createTask).toHaveBeenCalledWith({
-      title: "Test Task",
-      description: "Test Description",
-    });
+    await waitFor(() => expect(createTask).toHaveBeenCalledWith({
+      title: "New Task",
+      description: "Task Description",
+    }));
+
+    expect(window.location.reload).not.toHaveBeenCalled();
+
+    expect(titleInput).toHaveValue("");
+    expect(descInput).toHaveValue("");
   });
 });

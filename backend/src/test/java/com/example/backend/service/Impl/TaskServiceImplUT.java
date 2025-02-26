@@ -3,7 +3,6 @@ package com.example.backend.service.Impl;
 import com.example.backend.dto.TaskDto;
 import com.example.backend.model.Task;
 import com.example.backend.repository.TaskRepository;
-import com.example.backend.service.TaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +19,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TaskServiceImplTest {
+class TaskServiceImplUT {
 
     @Mock
     private TaskRepository taskRepository;

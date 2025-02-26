@@ -17,6 +17,7 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
+    //create task functionality
     @Override
     public TaskDto saveTask(TaskDto taskDto) {
         Task task = new Task();
@@ -30,6 +31,7 @@ public class TaskServiceImpl implements TaskService {
         return taskDto;
     }
 
+    //printing task list functionality
     @Override
     public List<TaskDto> findTaskList() {
         List<Task> tasks = taskRepository.findTop5ByIsClosedFalseOrderByCreatedAtAsc();
@@ -43,13 +45,10 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    //update task isclosed status
     @Override
     public void updateTaskStatus(int taskId) {
         taskRepository.updateIsClosedAndUpdatedAtById(taskId, Boolean.TRUE, LocalDateTime.now());
     }
 
-    @Override
-    public void deleteTask(int taskId) {
-        taskRepository.deleteById(taskId);
-    }
 }

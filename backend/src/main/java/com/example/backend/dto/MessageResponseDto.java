@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageResponseDto {
-
+    //create a dto for print respond messages details
     private String message;
     private Boolean isSuccess;
 }
