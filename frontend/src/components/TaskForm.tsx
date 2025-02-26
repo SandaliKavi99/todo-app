@@ -32,7 +32,7 @@ function TaskForm() {
         required
       />
       <div className="submit-btn">
-        <button type="submit">Add</button>
+        <button>Add</button>
       </div>
     </form>
   );
