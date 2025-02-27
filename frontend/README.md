@@ -1,4 +1,4 @@
-# instructions to build and run todo-app
+# Instructions to build and run todo-app
 
 ## 01. Clone the code using Github URL and go to the todo-app folder
 
