@@ -26,7 +26,7 @@ function TaskList() {
     setTasks((prevTask) => prevTask.filter((task) => task.id !== id));
   };
 
-  if (!tasks || tasks.length === 0) {
+  if (!tasks.length) {
     <p>No Tasks Avalable</p>;
   }
   return (
