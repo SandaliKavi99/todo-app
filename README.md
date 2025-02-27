@@ -4,7 +4,7 @@
 
 ## 01. Clone the code using Github URL and go to the todo-app folder
 
-### `git clone`
+### `git clone https://github.com/SandaliKavi99/todo-app.git`
 ### `cd todo-app`
 
 ## 02. Create target folder in backend
