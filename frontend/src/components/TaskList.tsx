@@ -18,12 +18,12 @@ function TaskList() {
       setTasks(data);
     }
     loadTaskList();
-  }, [tasks]);
+  }, []);
 
   //call for making task as done operation
   const handleDone = async (id: number) => {
     await markTaskasCompleted(id);
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks((prevTask) => prevTask.filter((task) => task.id !== id));
   };
 
   if (!tasks || tasks.length === 0) {
