@@ -10,7 +10,7 @@
 ### `cd backend`
 ### `./mvnw clean package`  # using Maven
 
-## 03. Run docker engine or open Docker Desktop app then run below commands
+## 03. Run docker engine or open Docker Desktop app then run below commands, make sure all relevant ports are available (3306, 8080, 3000)
 
 ### `docker-compose build`
 ### `docker-compose up`
